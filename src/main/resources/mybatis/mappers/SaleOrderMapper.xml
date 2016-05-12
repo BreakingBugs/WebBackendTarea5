@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="py.una.pol.web.tarea4.mapper.SaleOrderMapper">
+<mapper namespace="py.una.pol.web.tarea6.mapper.SaleOrderMapper">
     <resultMap id="saleOrderResult" type="SaleOrder" autoMapping="true">
         <id property="id" column="id"/>
-        <association property="item" resultMap="py.una.pol.web.tarea4.mapper.ItemMapper.itemResult" columnPrefix="item_"/>
+        <association property="item" resultMap="py.una.pol.web.tarea6.mapper.ItemMapper.itemResult" columnPrefix="item_"/>
     </resultMap>
 
     <select id="getSaleOrder" resultMap="saleOrderResult">

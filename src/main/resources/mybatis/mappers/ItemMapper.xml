@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="py.una.pol.web.tarea4.mapper.ItemMapper">
+<mapper namespace="py.una.pol.web.tarea6.mapper.ItemMapper">
     <resultMap id="itemResult" type="Item" autoMapping="true">
         <id property="id" column="id"/>
         <association property="duplicate" resultMap="duplicateResult"/>

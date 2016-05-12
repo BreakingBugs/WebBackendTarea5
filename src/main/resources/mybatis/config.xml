@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <package name="py.una.pol.web.tarea4.model"/>
+    <package name="py.una.pol.web.tarea6.model"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -15,13 +15,13 @@
     </environment>
   </environments>
   <mappers>
-    <mapper class="py.una.pol.web.tarea4.mapper.CustomerMapper"/>
-    <mapper class="py.una.pol.web.tarea4.mapper.DuplicateItemMapper"/>
+    <mapper class="py.una.pol.web.tarea6.mapper.CustomerMapper"/>
+    <mapper class="py.una.pol.web.tarea6.mapper.DuplicateItemMapper"/>
     <mapper resource="mybatis/mappers/ItemMapper.xml"/>
-    <mapper class="py.una.pol.web.tarea4.mapper.OrderMapper"/>
-    <mapper class="py.una.pol.web.tarea4.mapper.PaymentMapper"/>
-    <mapper class="py.una.pol.web.tarea4.mapper.ProviderMapper"/>
-    <mapper class="py.una.pol.web.tarea4.mapper.SaleMapper"/>
+    <mapper class="py.una.pol.web.tarea6.mapper.OrderMapper"/>
+    <mapper class="py.una.pol.web.tarea6.mapper.PaymentMapper"/>
+    <mapper class="py.una.pol.web.tarea6.mapper.ProviderMapper"/>
+    <mapper class="py.una.pol.web.tarea6.mapper.SaleMapper"/>
     <mapper resource="mybatis/mappers/SaleOrderMapper.xml"/>
   </mappers>
 </configuration>
