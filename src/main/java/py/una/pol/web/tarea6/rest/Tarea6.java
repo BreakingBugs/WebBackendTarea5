@@ -14,6 +14,7 @@ public class Tarea6 extends Application {
         set.add(CustomerService.class);
         set.add(ItemService.class);
         set.add(ProviderService.class);
+        set.add(UserService.class);
         return set;
     }
 }

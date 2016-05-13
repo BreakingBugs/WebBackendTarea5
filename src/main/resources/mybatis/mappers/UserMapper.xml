@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="py.una.pol.web.tarea6.mapper.UserMapper">
+    <resultMap id="userResult" type="User" autoMapping="true">
+        <id property="id" column="id"/>
+        <result column="role" property="role" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+    </resultMap>
+
+
+    <select id="getUser" resultMap="userResult">
+        SELECT
+        id,
+        username,
+        password,
+        role
+        FROM app_user
+        WHERE id = #{id}
+    </select>
+
+    <select id="getUsers" resultMap="userResult">
+        SELECT
+        id,
+        username,
+        password,
+        role
+        FROM app_user
+    </select>
+</mapper>

@@ -73,6 +73,11 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.0</version>
         </dependency>
+        <dependency>
+            <groupId>de.svenkubiak</groupId>
+            <artifactId>jBCrypt</artifactId>
+            <version>0.4.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>Tarea6</finalName>

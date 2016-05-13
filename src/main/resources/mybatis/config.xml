@@ -6,6 +6,9 @@
   <typeAliases>
     <package name="py.una.pol.web.tarea6.model"/>
   </typeAliases>
+  <typeHandlers>
+    <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="py.una.pol.web.tarea6.model.Role"/>
+  </typeHandlers>
   <environments default="development">
     <environment id="development">
       <transactionManager type="MANAGED"/>
@@ -23,5 +26,7 @@
     <mapper class="py.una.pol.web.tarea6.mapper.ProviderMapper"/>
     <mapper class="py.una.pol.web.tarea6.mapper.SaleMapper"/>
     <mapper resource="mybatis/mappers/SaleOrderMapper.xml"/>
+    <mapper resource="mybatis/mappers/UserMapper.xml"/>
+    <mapper resource="mybatis/mappers/AccessTokenMapper.xml"/>
   </mappers>
 </configuration>

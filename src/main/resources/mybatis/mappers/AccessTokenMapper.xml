@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="py.una.pol.web.tarea6.mapper.AccessTokenMapper">
+    <resultMap id="accessTokenResult" type="AccessToken" autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="user" resultMap="py.una.pol.web.tarea6.mapper.UserMapper.userResult" columnPrefix="user_"/>
+    </resultMap>
+
+
+
+    <select id="getAccessToken" resultMap="accessTokenResult">
+        SELECT
+        a.id,
+        a.token,
+        u.id       AS user_id,
+        u.username AS user_username,
+        u.role     AS user_role
+        FROM access_token a
+        INNER JOIN User u ON u.id = a.user_id
+        WHERE i.id = #{id}
+    </select>
+
+    <select id="getAccessTokens" resultMap="accessTokenResult">
+        SELECT
+        a.id,
+        a.token,
+        u.id       AS user_id,
+        u.username AS user_username,
+        u.role     AS user_role
+        FROM access_token a
+        INNER JOIN User u ON u.id = a.user_id
+    </select>
+
+</mapper>
