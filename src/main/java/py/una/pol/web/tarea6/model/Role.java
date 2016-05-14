@@ -13,7 +13,7 @@ public enum Role {
         return value;
     }
 
-    public void setValue(int value) {
+    void setValue(int value) {
         this.value = value;
     }
 }

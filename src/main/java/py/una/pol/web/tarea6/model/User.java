@@ -1,5 +1,7 @@
 package py.una.pol.web.tarea6.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 /**

@@ -48,10 +48,6 @@ public class UserService {
     @Produces("application/json")
     public Response getUser(@PathParam("id") Integer id) {
         User p = userController.getUser(id);
-        System.out.println("Usuario: " + p.getUsername());
-        System.out.println("Rol: ");
-        System.out.println(p.getRole());
-        System.out.println(p.getRole().getValue());
         if (p != null) {
             return Response.ok(p).build();
         } else {
@@ -118,7 +114,7 @@ public class UserService {
     }
 
 
-    private class LoginResponse implements Serializable {
+    private static class LoginResponse implements Serializable {
         private static final long serialVersionUID = 1L;
 
         private String accessToken;
