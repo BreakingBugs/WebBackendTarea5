@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import py.una.pol.web.tarea6.controller.ItemController;
 import py.una.pol.web.tarea6.model.Item;
+import py.una.pol.web.tarea6.model.Role;
+import py.una.pol.web.tarea6.rest.interceptor.RequiresRole;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+@RequiresRole(Role.ADMIN)
 @Path("/productos")
 public class ItemService {
     @Inject

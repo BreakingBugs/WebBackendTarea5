@@ -1,9 +1,10 @@
 package py.una.pol.web.tarea6.model;
 
+import py.una.pol.web.tarea6.rest.interceptor.RequiresRole;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;

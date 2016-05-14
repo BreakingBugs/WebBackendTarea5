@@ -5,12 +5,15 @@ import py.una.pol.web.tarea6.exceptions.OutOfStockException;
 import py.una.pol.web.tarea6.model.Customer;
 import py.una.pol.web.tarea6.model.Order;
 import py.una.pol.web.tarea6.model.Payment;
+import py.una.pol.web.tarea6.model.Role;
+import py.una.pol.web.tarea6.rest.interceptor.RequiresRole;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+@RequiresRole(Role.ADMIN)
 @Path("/clientes")
 public class CustomerService {
 
@@ -31,6 +34,7 @@ public class CustomerService {
         return newCustomer;
     }
 
+    @RequiresRole(Role.VENDEDOR)
     @POST
     @Path("/{id: [0-9]*}/sell")
     @Consumes("application/json")
@@ -44,6 +48,7 @@ public class CustomerService {
         }
     }
 
+    @RequiresRole(Role.VENDEDOR)
     @POST
     @Path("/{id: [0-9]*}/pay")
     @Consumes("application/json")

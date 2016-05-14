@@ -2,6 +2,8 @@ package py.una.pol.web.tarea6.controller;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mindrot.jbcrypt.BCrypt;
+import py.una.pol.web.tarea6.exceptions.AuthenticationFailException;
+import py.una.pol.web.tarea6.exceptions.AuthorizationFailException;
 import py.una.pol.web.tarea6.exceptions.LoginFailException;
 import py.una.pol.web.tarea6.exceptions.LogoutFailException;
 import py.una.pol.web.tarea6.initialization.MyBatisSingleton;
@@ -10,6 +12,7 @@ import py.una.pol.web.tarea6.model.*;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.NotAuthorizedException;
 import java.util.List;
 import java.util.UUID;
 
@@ -115,20 +118,37 @@ public class UserController {
 
     public void logout(String token) throws LogoutFailException {
         SqlSession session = myBatis.getFactory().openSession();
-        try {
+        try{
             AccessTokenMapper mapper = session.getMapper(AccessTokenMapper.class);
-            AccessToken realAccessToken = mapper.getAccessTokenByToken(token);
-
-            if(realAccessToken == null) {
-                throw new LogoutFailException("Access token no válido.");
-            }
+            AccessToken realAccessToken = validate(token);
             mapper.deleteAccessToken(realAccessToken.getId());
-        } finally {
-            session.close();
+        } catch(AuthenticationFailException e) {
+            throw new LogoutFailException(e.getMessage(), e);
         }
     }
 
     public String generateAccessToken() {
         return UUID.randomUUID().toString();
+    }
+
+    public AccessToken validate(String token) throws AuthenticationFailException {
+        SqlSession session = myBatis.getFactory().openSession();
+        try {
+            AccessTokenMapper mapper = session.getMapper(AccessTokenMapper.class);
+            AccessToken realAccessToken = mapper.getAccessTokenByToken(token);
+
+            if(realAccessToken == null) {
+                throw new AuthenticationFailException("Access token no válido.");
+            }
+            return realAccessToken;
+        } finally {
+            session.close();
+        }
+    }
+
+    public void checkPermission(User user, Role role) throws AuthorizationFailException {
+        if(user.getRole().compareTo(role) != 0) {
+            throw new AuthorizationFailException("No posee los permisos necesarios.");
+        }
     }
 }

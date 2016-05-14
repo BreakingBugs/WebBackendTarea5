@@ -11,6 +11,7 @@ import py.una.pol.web.tarea6.model.User;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -96,7 +97,7 @@ public class UserService {
     @POST
     @Path("/logout")
     @Produces("application/json")
-    public Response logout(@HeaderParam("Authorization") String authorization) {
+    public Response logout(@HeaderParam(HttpHeaders.AUTHORIZATION) String authorization) {
         if(authorization == null) {
             Map<String, String> msg = new HashMap<String, String>();
             msg.put("error", "Header Authorization no presente.");

@@ -1,6 +1,7 @@
 package py.una.pol.web.tarea6.model;
-import java.io.Serializable;
+import py.una.pol.web.tarea6.rest.interceptor.RequiresRole;
 
+import java.io.Serializable;
 
 public class Item implements Serializable {
 

@@ -3,12 +3,15 @@ package py.una.pol.web.tarea6.rest;
 import py.una.pol.web.tarea6.controller.ProviderController;
 import py.una.pol.web.tarea6.model.Order;
 import py.una.pol.web.tarea6.model.Provider;
+import py.una.pol.web.tarea6.model.Role;
+import py.una.pol.web.tarea6.rest.interceptor.RequiresRole;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+@RequiresRole(Role.ADMIN)
 @Path("/proveedores")
 public class ProviderService {
     @Inject
@@ -30,6 +33,7 @@ public class ProviderService {
         return newProvider;
     }
 
+    @RequiresRole(Role.COMPRADOR)
     @POST
     @Path("/{id: [0-9]*}/buy")
     @Consumes("application/json")
