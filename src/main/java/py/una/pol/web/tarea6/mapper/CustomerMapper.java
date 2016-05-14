@@ -33,7 +33,7 @@ public interface CustomerMapper {
   @Select("SELECT * FROM Sale WHERE customer_id=#{id}")
   @Results({
           @Result(property = "id", column = "id"),
-          @Result(property = "orders", column = "id", javaType = List.class, many = @Many(select = "py.una.pol.web.tarea4.mapper.SaleOrderMapper.getOrdersBySale"))
+          @Result(property = "orders", column = "id", javaType = List.class, many = @Many(select = "py.una.pol.web.tarea6.mapper.SaleOrderMapper.getOrdersBySale"))
   })
   List<Sale> getSalesByCustomer(int id);
 }

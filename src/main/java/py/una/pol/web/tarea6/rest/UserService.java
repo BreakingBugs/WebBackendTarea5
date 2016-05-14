@@ -7,7 +7,9 @@ import py.una.pol.web.tarea6.exceptions.LoginFailException;
 import py.una.pol.web.tarea6.exceptions.LogoutFailException;
 import py.una.pol.web.tarea6.model.Order;
 import py.una.pol.web.tarea6.model.Provider;
+import py.una.pol.web.tarea6.model.Role;
 import py.una.pol.web.tarea6.model.User;
+import py.una.pol.web.tarea6.rest.interceptor.RequiresRole;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
