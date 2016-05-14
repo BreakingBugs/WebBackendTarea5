@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface UserMapper {
     User getUser(int id);
+    User getUserByUsername(String username);
     List<User> getUsers();
 
     @Insert("INSERT INTO app_user(username, password, role) VALUES (#{username}, #{password}, #{role.value})")

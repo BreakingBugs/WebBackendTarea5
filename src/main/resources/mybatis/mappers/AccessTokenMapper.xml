@@ -18,9 +18,22 @@
         u.username AS user_username,
         u.role     AS user_role
         FROM access_token a
-        INNER JOIN User u ON u.id = a.user_id
-        WHERE i.id = #{id}
+        INNER JOIN app_user u ON u.id = a.user_id
+        WHERE a.id = #{id}
     </select>
+
+    <select id="getAccessTokenByToken" resultMap="accessTokenResult">
+        SELECT
+        a.id,
+        a.token,
+        u.id       AS user_id,
+        u.username AS user_username,
+        u.role     AS user_role
+        FROM access_token a
+        INNER JOIN app_user u ON u.id = a.user_id
+        WHERE a.token = #{token}
+    </select>
+
 
     <select id="getAccessTokens" resultMap="accessTokenResult">
         SELECT
@@ -30,7 +43,7 @@
         u.username AS user_username,
         u.role     AS user_role
         FROM access_token a
-        INNER JOIN User u ON u.id = a.user_id
+        INNER JOIN app_user u ON u.id = a.user_id
     </select>
 
 </mapper>

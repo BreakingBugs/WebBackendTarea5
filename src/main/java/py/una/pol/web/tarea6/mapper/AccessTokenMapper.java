@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface AccessTokenMapper {
     AccessToken getAccessToken(int id);
+    AccessToken getAccessTokenByToken(String token);
     List<AccessToken> getAccessTokens();
 
     @Insert("INSERT INTO access_token(token, user_id) VALUES (#{token}, #{user.id})")

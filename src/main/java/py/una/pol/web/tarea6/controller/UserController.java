@@ -2,9 +2,8 @@ package py.una.pol.web.tarea6.controller;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mindrot.jbcrypt.BCrypt;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import py.una.pol.web.tarea6.exceptions.OutOfStockException;
+import py.una.pol.web.tarea6.exceptions.LoginFailException;
+import py.una.pol.web.tarea6.exceptions.LogoutFailException;
 import py.una.pol.web.tarea6.initialization.MyBatisSingleton;
 import py.una.pol.web.tarea6.mapper.*;
 import py.una.pol.web.tarea6.model.*;
@@ -12,10 +11,9 @@ import py.una.pol.web.tarea6.model.*;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.UUID;
 
-/**
- * Created by codiumsa on 13/5/16.
- */
+
 @Stateless
 public class UserController {
     @Inject
@@ -85,5 +83,52 @@ public class UserController {
         finally {
             session.close();
         }
+    }
+
+    public String tryLogin(User user) throws LoginFailException {
+        String username = user.getUsername();
+
+        SqlSession session = myBatis.getFactory().openSession();
+        try {
+            UserMapper mapper = session.getMapper(UserMapper.class);
+            User realUser = mapper.getUserByUsername(username);
+
+            if(realUser == null) {
+                throw new LoginFailException("El usuario o la contraseña son incorrectos.");
+            }
+
+            if(user.getPassword() != null && BCrypt.checkpw(user.getPassword(), realUser.getPassword())) {
+                String accessToken = generateAccessToken();
+                AccessToken token = new AccessToken();
+                token.setToken(accessToken);
+                token.setUser(realUser);
+                AccessTokenMapper tokenMapper = session.getMapper(AccessTokenMapper.class);
+                tokenMapper.insertAccessToken(token);
+                return accessToken;
+            } else {
+                throw new LoginFailException("El usuario o la contraseña son incorrectos.");
+            }
+        } finally {
+            session.close();
+        }
+    }
+
+    public void logout(String token) throws LogoutFailException {
+        SqlSession session = myBatis.getFactory().openSession();
+        try {
+            AccessTokenMapper mapper = session.getMapper(AccessTokenMapper.class);
+            AccessToken realAccessToken = mapper.getAccessTokenByToken(token);
+
+            if(realAccessToken == null) {
+                throw new LogoutFailException("Access token no válido.");
+            }
+            mapper.deleteAccessToken(realAccessToken.getId());
+        } finally {
+            session.close();
+        }
+    }
+
+    public String generateAccessToken() {
+        return UUID.randomUUID().toString();
     }
 }

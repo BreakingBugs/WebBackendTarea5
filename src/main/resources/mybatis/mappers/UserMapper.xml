@@ -19,6 +19,16 @@
         WHERE id = #{id}
     </select>
 
+    <select id="getUserByUsername" resultMap="userResult">
+        SELECT
+        id,
+        username,
+        password,
+        role
+        FROM app_user
+        WHERE username = #{username}
+    </select>
+
     <select id="getUsers" resultMap="userResult">
         SELECT
         id,
